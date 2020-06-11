@@ -10,7 +10,6 @@ public class TravelDeal {
 
 
     public TravelDeal(String title, String price, String description, String image_url) {
-        this.setId(id);
         this.setTitle(title);
         this.setPrice(price);
         this.setDescription(description);

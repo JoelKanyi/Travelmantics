@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
-
-    EditText txtTitle,txtPrice,txtDescription;
+    private EditText txtTitle,txtPrice,txtDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         txtPrice = findViewById(R.id.txtPrice);
         txtDescription = findViewById(R.id.txtDescription);
-
     }
 
     @Override
@@ -44,15 +42,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.save_menu:
-                saveDeal();
-                Toast.makeText(this,"Deal Saved",Toast.LENGTH_LONG).show();
-                clean();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId()== R.id.save_menu){
+            saveDeal();
+            Toast.makeText(this,"Deal Saved",Toast.LENGTH_LONG).show();
+            clean();
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void saveDeal(){
