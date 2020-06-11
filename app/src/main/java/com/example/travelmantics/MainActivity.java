@@ -3,6 +3,7 @@ package com.example.travelmantics;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
             saveDeal();
             Toast.makeText(this,"Deal Saved",Toast.LENGTH_LONG).show();
             clean();
+        }
+        else if (item.getItemId()== R.id.save_menu){
+            Intent i = new Intent(this,ListActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

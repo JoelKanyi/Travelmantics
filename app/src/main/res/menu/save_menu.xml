@@ -4,4 +4,8 @@
         <item android:id="@+id/save_menu"
             android:title="Save"
             app:showAsAction="always"/>
+
+        <item android:id="read_menu"
+                android:title="Read"
+                app:showAsAction="always"/>
 </menu>
