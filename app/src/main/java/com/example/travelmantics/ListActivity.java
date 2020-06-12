@@ -26,7 +26,6 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         FirebaseUtil.openFirebaseReference("traveldeals");
-
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         mChildEventListener = new ChildEventListener() {

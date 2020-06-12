@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class DealActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -49,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 saveDeal();
                 Toast.makeText(this, "Deal Saved", Toast.LENGTH_LONG).show();
                 clean();
-                return true;
-            }
-            case R.id.read_menu: {
-                Intent i = new Intent(this, ListActivity.class);
-                startActivity(i);
                 return true;
             }
             default:
