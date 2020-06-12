@@ -5,7 +5,7 @@
             android:title="Save"
             app:showAsAction="always"/>
 
-        <item android:id="read_menu"
+        <item android:id="@+id/read_menu"
                 android:title="Read"
                 app:showAsAction="always"/>
 </menu>

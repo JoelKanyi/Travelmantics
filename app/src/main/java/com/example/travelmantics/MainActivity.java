@@ -25,8 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference().child("traveldeals");
+        FirebaseUtil.openFirebaseReference("traveldeals");
+
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
         txtTitle = findViewById(R.id.txtTitle);
         txtPrice = findViewById(R.id.txtPrice);
@@ -42,18 +44,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId()== R.id.save_menu){
-            saveDeal();
-            Toast.makeText(this,"Deal Saved",Toast.LENGTH_LONG).show();
-            clean();
+        switch (item.getItemId()) {
+            case R.id.save_menu: {
+                saveDeal();
+                Toast.makeText(this, "Deal Saved", Toast.LENGTH_LONG).show();
+                clean();
+                return true;
+            }
+            case R.id.read_menu: {
+                Intent i = new Intent(this, ListActivity.class);
+                startActivity(i);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else if (item.getItemId()== R.id.save_menu){
-            Intent i = new Intent(this,ListActivity.class);
-            startActivity(i);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void saveDeal(){
