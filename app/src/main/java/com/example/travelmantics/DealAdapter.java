@@ -92,7 +92,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
         return deal.size();
     }
 
-    public class DealViewHolder extends RecyclerView.ViewHolder{
+    public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
         TextView title,description,price;
@@ -101,13 +101,19 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             title = itemView.findViewById(R.id.tv_title);
             description = itemView.findViewById(R.id.tv_description);
             price = itemView.findViewById(R.id.tv_price);
-
+            itemView.setOnClickListener(this);
         }
 
         public void bind(TravelDeal deal){
             title.setText(deal.getTitle());
             description.setText(deal.getDescription());
             price.setText(deal.getPrice());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Log.d("Click",String.valueOf(position));
         }
     }
 }
