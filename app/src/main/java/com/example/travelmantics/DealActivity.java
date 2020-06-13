@@ -19,6 +19,7 @@ public class DealActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private EditText txtTitle,txtPrice,txtDescription;
+    TravelDeal deal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,19 @@ public class DealActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         txtPrice = findViewById(R.id.txtPrice);
         txtDescription = findViewById(R.id.txtDescription);
+
+        Intent intent = getIntent();
+        TravelDeal deal = (TravelDeal) intent.getSerializableExtra("Deal");
+
+        if (deal==null){
+            deal = new TravelDeal();
+        }
+
+        this.deal = deal;
+
+        txtTitle.setText(deal.getTitle());
+        txtDescription.setText(deal.getDescription());
+        txtPrice.setText(deal.getPrice());
     }
 
     @Override
@@ -49,6 +63,13 @@ public class DealActivity extends AppCompatActivity {
                 saveDeal();
                 Toast.makeText(this, "Deal Saved", Toast.LENGTH_LONG).show();
                 clean();
+                backToList();
+                return true;
+            }
+            case R.id.delete_deal: {
+                deleteDeal();
+                Toast.makeText(this, "Deal Deleted Successfully", Toast.LENGTH_LONG).show();
+                backToList();
                 return true;
             }
             default:
@@ -57,13 +78,33 @@ public class DealActivity extends AppCompatActivity {
     }
 
     public void saveDeal(){
-        String title = txtTitle.getText().toString();
-        String price = txtPrice.getText().toString();
-        String description = txtDescription.getText().toString();
+        deal.setTitle(txtTitle.getText().toString());
+        deal.setPrice(txtPrice.getText().toString());
+        deal.setDescription(txtDescription.getText().toString());
 
-        TravelDeal deal = new TravelDeal(title,price,description,"");
-        mDatabaseReference.push().setValue(deal);
+        if (deal.getId()==null){
+            mDatabaseReference.push().setValue(deal);
+
+        }
+        else
+            mDatabaseReference.child(deal.getId()).setValue(deal);
+
+
     }
+
+    public void deleteDeal(){
+        if (deal==null){
+            Toast.makeText(this,"Save a deal first",Toast.LENGTH_LONG).show();
+        }
+        else
+            mDatabaseReference.child(deal.getId()).removeValue();
+            backToList();
+    }
+
+    public void backToList(){
+        startActivity(new Intent(this,ListMantics.class));
+    }
+
 
     public void clean(){
         txtTitle.setText("");
