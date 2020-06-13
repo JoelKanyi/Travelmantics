@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class ListMantics extends AppCompatActivity {
 
@@ -44,5 +46,17 @@ public class ListMantics extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUtil.detachListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUtil.attachListener();
     }
 }
