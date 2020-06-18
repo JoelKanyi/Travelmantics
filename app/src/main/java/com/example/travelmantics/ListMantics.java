@@ -30,6 +30,9 @@ public class ListMantics extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater  = getMenuInflater();
         inflater.inflate(R.menu.insert_deal,menu);
+        MenuItem insertMenu = findViewById(R.id.insert_menu);
+
+        if()
         return true;
     }
 
@@ -72,5 +75,9 @@ public class ListMantics extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rvDeal.setLayoutManager(layoutManager);
         FirebaseUtil.attachListener();
+    }
+
+    public void hideMenu(){
+        invalidateOptionsMenu();
     }
 }
