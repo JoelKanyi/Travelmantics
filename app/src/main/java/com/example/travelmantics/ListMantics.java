@@ -21,12 +21,6 @@ public class ListMantics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_mantics);
 
-        RecyclerView rvDeal = findViewById(R.id.rv_deals);
-        FirebaseUtil.openFirebaseReference("traveldeals",this);
-        final DealAdapter adapter = new DealAdapter();
-        rvDeal.setAdapter(adapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        rvDeal.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -57,6 +51,12 @@ public class ListMantics extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        RecyclerView rvDeal = findViewById(R.id.rv_deals);
+        FirebaseUtil.openFirebaseReference("traveldeals",this);
+        final DealAdapter adapter = new DealAdapter();
+        rvDeal.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        rvDeal.setLayoutManager(layoutManager);
         FirebaseUtil.attachListener();
     }
 }
