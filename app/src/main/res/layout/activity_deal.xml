@@ -7,20 +7,32 @@
     tools:context=".DealActivity">
 
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:srcCompat="@android:drawable/screen_background_light_transparent" />
+
     <EditText
         android:id="@+id/txtTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#000"
         android:ems="10"
-        android:hint="Deal title"
+        android:hint="@string/deal_title"
         android:textColorHint="#000"
         android:inputType="textPersonName"
         android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="@+id/image"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        android:importantForAutofill="no" tools:targetApi="lollipop" />
 
     <EditText
         android:id="@+id/txtPrice"
@@ -29,13 +41,14 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#000"
         android:ems="10"
-        android:hint="Price"
+        android:hint="@string/price"
         android:textColorHint="#000"
         android:inputType="textPersonName"
         android:textColor="#000"
         app:layout_constraintEnd_toEndOf="@+id/txtTitle"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        android:importantForAutofill="no" tools:targetApi="lollipop" />
 
     <EditText
         android:id="@+id/txtDescription"
@@ -44,13 +57,14 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#000"
         android:ems="10"
-        android:hint="Description"
+        android:hint="@string/description"
         android:textColorHint="#000"
         android:inputType="textPersonName"
         android:textColor="#000"
         app:layout_constraintEnd_toEndOf="@+id/txtPrice"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice" tools:targetApi="lollipop"
+        android:importantForAutofill="no" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -72,4 +86,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="50dp" />
+
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Upload Image"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

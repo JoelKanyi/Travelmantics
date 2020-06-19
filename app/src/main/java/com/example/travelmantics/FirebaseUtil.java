@@ -13,6 +13,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.sql.Ref;
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class FirebaseUtil {
     public static DatabaseReference mDatabaseReference;
     private static FirebaseUtil mFirebaseUtil;
     private static FirebaseAuth mFirebaseAuth;
-    private static Activity caller;
+    public static FirebaseStorage mStorage;
+    public static StorageReference mStorageRef;
+    private static ListMantics caller;
     private static FirebaseAuth.AuthStateListener mAuthStateListener;
     public static ArrayList<TravelDeal> mDeals;
     private static final int RC_SIGN_IN = 42;
@@ -38,7 +42,7 @@ public class FirebaseUtil {
     //to prevent this class from being instantiated from outside of this class
     private FirebaseUtil(){}
 
-    public static void openFirebaseReference(String ref, final Activity callerActivity){
+    public static void openFirebaseReference(String ref, final ListMantics callerActivity){
         if (mFirebaseUtil==null){
             mFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -58,6 +62,7 @@ public class FirebaseUtil {
                     Toast.makeText(callerActivity.getBaseContext(),"Welcome back!",Toast.LENGTH_LONG).show();
                 }
             };
+            connectStorage();
 
         }
         mDeals = new ArrayList<TravelDeal>();
@@ -71,6 +76,7 @@ public class FirebaseUtil {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     FirebaseUtil.isAdmin = true;
+                    caller.showMenu();
             }
 
             @Override
@@ -119,5 +125,10 @@ public class FirebaseUtil {
 
     public static void detachListener(){
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
+    public static void connectStorage(){
+        mStorage = FirebaseStorage.getInstance();
+        mStorageRef = mStorage.getReference().child("deals_pictures");
     }
 }
