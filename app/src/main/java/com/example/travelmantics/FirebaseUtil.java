@@ -23,8 +23,6 @@ import java.util.List;
 
 public class FirebaseUtil {
 
-
-
     //all members of this class are static because we will be able to call them without instantiating them
     public static FirebaseDatabase mFirebaseDatabase;
     public static DatabaseReference mDatabaseReference;
@@ -37,7 +35,6 @@ public class FirebaseUtil {
     public static ArrayList<TravelDeal> mDeals;
     private static final int RC_SIGN_IN = 42;
     public static boolean isAdmin;
-
 
     //to prevent this class from being instantiated from outside of this class
     private FirebaseUtil(){}
@@ -59,7 +56,6 @@ public class FirebaseUtil {
                         String userId = firebaseAuth.getUid();
                         checkAdmin(userId);
                     }
-                    Toast.makeText(callerActivity.getBaseContext(),"Welcome back!",Toast.LENGTH_LONG).show();
                 }
             };
             connectStorage();
@@ -120,7 +116,6 @@ public class FirebaseUtil {
 
     public static void attachListener(){
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-
     }
 
     public static void detachListener(){
