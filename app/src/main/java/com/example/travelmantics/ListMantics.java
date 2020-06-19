@@ -23,15 +23,13 @@ public class ListMantics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_mantics);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater  = getMenuInflater();
         inflater.inflate(R.menu.insert_deal,menu);
-        MenuItem insertMenu = menu.findItem(R.id.insert_de);
-
+        MenuItem insertMenu = menu.findItem(R.id.insert_deal);
 
         if (FirebaseUtil.isAdmin==true){
             insertMenu.setVisible(true);
@@ -47,7 +45,7 @@ public class ListMantics extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.insert_de:{
+            case R.id.insert_deal:{
                 startActivity(new Intent(this, DealActivity.class));
                 return true;
             }
