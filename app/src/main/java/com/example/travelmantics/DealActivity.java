@@ -35,16 +35,15 @@ public class DealActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private static final int PICTURE_CODE = 42;
     TravelDeal deal;
+    private Button btnUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal);
 
-        //FirebaseUtil.openFirebaseReference("traveldeals",this);
-
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("uploading image");
+        progressDialog.setTitle("Please Wait...\n"+"Uploading Image");
 
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
@@ -52,7 +51,7 @@ public class DealActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         txtPrice = findViewById(R.id.txtPrice);
         txtDescription = findViewById(R.id.txtDescription);
-        Button btnUpload = findViewById(R.id.btnUploadImage);
+        btnUpload = findViewById(R.id.btnUploadImage);
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +60,6 @@ public class DealActivity extends AppCompatActivity {
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
                 startActivityForResult(intent.createChooser(intent,"Insert picture"),PICTURE_CODE);
-
             }
         });
 
@@ -83,11 +81,13 @@ public class DealActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu,menu);
+
        if (FirebaseUtil.isAdmin){
            menu.findItem(R.id.save_menu).setVisible(true);
            menu.findItem(R.id.delete_deal).setVisible(true);
            enableEditText(true);
        }
+
        else {
            menu.findItem(R.id.save_menu).setVisible(false);
             menu.findItem(R.id.delete_deal).setVisible(false);
@@ -124,12 +124,9 @@ public class DealActivity extends AppCompatActivity {
 
         if (deal.getId()==null){
             mDatabaseReference.push().setValue(deal);
-
         }
         else
             mDatabaseReference.child(deal.getId()).setValue(deal);
-
-
     }
 
     public void deleteDeal(){
@@ -152,7 +149,7 @@ public class DealActivity extends AppCompatActivity {
         if (requestCode==PICTURE_CODE && resultCode== RESULT_OK){
             Uri file = data.getData();
             final StorageReference ref = FirebaseUtil.mStorageRef.child(file.getLastPathSegment());
-            UploadTask uploadTask ;
+            UploadTask uploadTask;
 
             uploadTask = ref.putFile(file);
 
@@ -200,5 +197,6 @@ public class DealActivity extends AppCompatActivity {
         txtTitle.setEnabled(isEnabled);
         txtPrice.setEnabled(isEnabled);
         txtDescription.setEnabled(isEnabled);
+        btnUpload.setEnabled(isEnabled);
     }
 }
